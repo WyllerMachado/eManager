@@ -1,0 +1,42 @@
+﻿@model IEnumerable<AV2_WyllerMachado.Models.Produto>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Produtos</h2>
+
+<p>
+    @Html.ActionLink("Novo Produto", "Novo", "Produtos", null, new { @class = "btn btn-primary" })
+</p>
+
+@if (!Model.Any())
+{
+    <p class="text-warning">Não existe nenhum produto cadastrado ainda</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Marca</th>
+                <th>Valor R$</th>
+                <th>Estoque</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var produto in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(produto.Nome, "Editar", "Produtos", new { id = produto.Id }, null)</td>
+                    <td>@produto.Marca</td>
+                    <td>@produto.Valor</td>
+                    <td>@produto.Estoque</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

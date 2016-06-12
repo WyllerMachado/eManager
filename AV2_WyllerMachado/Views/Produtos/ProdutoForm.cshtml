@@ -1,0 +1,40 @@
+﻿@model AV2_WyllerMachado.Models.Produto
+
+@{
+    var viewTitle = Model.Id == 0 ? "Novo Produto" : "Editar Produto";
+    ViewBag.Title = viewTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@viewTitle</h2>
+
+@using (Html.BeginForm("Salvar", "Produtos"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nome)
+        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Marca)
+        @Html.TextBoxFor(m => m.Marca, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Valor)
+        @Html.TextBoxFor(m => m.Valor, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Estoque)
+        @Html.TextBoxFor(m => m.Estoque, new { @class = "form-control" })
+    </div>
+
+    @Html.HiddenFor(m => m.Id)
+    <button type="submit" class="btn btn-primary">Salvar</button>
+
+    if (Model.Id != 0)
+    {
+        @Html.ActionLink("Excluir", "Excluir", "Produtos", new { id = Model.Id }, new { @class = "btn btn-danger" });
+    }
+}

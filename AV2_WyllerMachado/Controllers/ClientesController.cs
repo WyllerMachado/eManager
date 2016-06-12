@@ -50,17 +50,19 @@ namespace AV2_WyllerMachado.Controllers
             return View("ClienteForm", cliente);
         }
 
-
+        
         public ActionResult Excluir(int id)
         {
             var cliente = _context.Clientes.SingleOrDefault(c => c.Id == id);
 
-            if (cliente != null)
-            {
-                _context.Clientes.Remove(cliente);
-                _context.SaveChanges();
-            }
 
+            if (cliente == null)
+                return HttpNotFound();
+            
+
+            _context.Clientes.Remove(cliente);
+            _context.SaveChanges();
+            
             return RedirectToAction("Index", "Clientes");
         }
 
