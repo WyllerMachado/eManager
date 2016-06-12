@@ -1,0 +1,42 @@
+﻿@model IEnumerable<AV2_WyllerMachado.Models.Cliente>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Clientes</h2>
+
+<p>
+    @Html.ActionLink("Novo Cliente", "Novo", "Clientes", null, new { @class = "btn btn-primary" })
+</p>
+
+@if (!Model.Any())
+{
+    <p class="text-warning">Não existe nenhum cliente cadastrado ainda</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Endereço</th>
+                <th>Telefone</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var cliente in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(@cliente.Nome, "Editar", "Clientes", new { id = @cliente.Id }, null)</td>
+                    <td>@cliente.Cpf</td>
+                    <td>@cliente.Endereco</td>
+                    <td>@cliente.Telefone</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
